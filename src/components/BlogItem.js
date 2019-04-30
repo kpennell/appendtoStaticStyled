@@ -8,7 +8,7 @@ import { Link } from "gatsby"
 
 const styles = theme => ({
   BlogItemParent: {
-    width:450,
+    minWidth:'40%',
     height:150
       
   },
@@ -45,12 +45,9 @@ function BlogItem(props) {
             {post.title}
           </Typography>
           </Link>
-
           <Typography variant="subtitle1" color="textSecondary">
             {post.date}
           </Typography>
-
-    
         </CardContent>
         
       </div>

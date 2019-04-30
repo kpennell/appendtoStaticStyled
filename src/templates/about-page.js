@@ -8,7 +8,8 @@ const styles = theme => ({
   heroText: {
     color:'white',
     textAlign: 'center',
-    lineHeight:7
+    lineHeight:7,
+    marginTop:-20
   },
   mainBlogCopy: {
     marginTop: theme.spacing.unit,

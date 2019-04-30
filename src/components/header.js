@@ -1,84 +1,80 @@
 import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
+import { withStyles } from "@material-ui/core/styles"
+import AppBar from "@material-ui/core/AppBar"
+import Toolbar from "@material-ui/core/Toolbar"
+import Button from "@material-ui/core/Button"
 
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
+import { StaticQuery, graphql } from "gatsby"
+import Img from "gatsby-image"
 
 
 const styles = {
   root: {
-    flexGrow: 1,
+    flexGrow: "1 !important",
   },
-  appbar:{
-    backgroundColor:"#AC493A"
+  appbar: {
+    backgroundColor: "#AC493A",
   },
-  grow: {
-    flexGrow: 1,
+  grow:{
+    flexGrow:1
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-  link:{
+  link: {
     color: `white`,
     textDecoration: `none`,
+  },
+}
+
+class Header extends React.Component {
+  constructor(props) {
+    super(props)
   }
-};
 
-const Header = ({ classes, siteTitle }) => (
+  render() {
+    const { classes } = this.props
 
-  <div className={classes.root}>
-  <AppBar position="static" className={classes.appbar}>
-    <Toolbar>
-    <Link
-          to="/"
-          className={classes.grow}
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}>
-      <Typography variant="h6" color="inherit" >
-        {siteTitle}
-      </Typography>
-      </Link>
+    return (
+      <div className={classes.root}>
+        <AppBar position="static" className={classes.appbar}>
+          <Toolbar>
+            <div className={classes.grow}>
+              <Link to='/' >
+              <StaticQuery
+                query={graphql`
+                  query {
+                    file(relativePath: { eq: "appendto_logo.png" }) {
+                      childImageSharp {
+                        # Specify the image processing specifications right in the query.
+                        # Makes it trivial to update as your page's design changes.
+                        fixed(width: 150) {
+                          ...GatsbyImageSharpFixed_noBase64
+                        }
+                      }
+                    }
+                  }
+                `}
+                render={data => <Img  critical={true} fadeIn fixed={data.file.childImageSharp.fixed} />}
+              />
+              </Link>
+            </div>
+            <div>
+              <Link to="/about" className={classes.link}>
+                <Button color="inherit">About</Button>
+              </Link>
 
-      <Link
-          to="/about"
-          className={classes.link}
-          >
-      <Button color="inherit">About</Button>
-      </Link>
+              <Link to="/blog" className={classes.link}>
+                <Button color="inherit">Blog</Button>
+              </Link>
 
-      <Link
-          to="/blog"
-          className={classes.link}
-          >
-      <Button color="inherit">Blog</Button>
-      </Link>
-
-      <Link
-          to="/courses"
-          className={classes.link}
-          >
-      <Button color="inherit">Courses</Button>
-      </Link>
-
-    </Toolbar>
-  </AppBar>
-</div>
-)
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
+              <Link to="/courses" className={classes.link}>
+                <Button color="inherit">Courses</Button>
+              </Link>
+            </div>
+          </Toolbar>
+        </AppBar>
+      </div>
+    )
+  }
 }
 
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
-export default withStyles(styles)(Header);
+export default withStyles(styles)(Header)

@@ -4,6 +4,7 @@ title: About Page (created with gatsby-node.js)
 image: /img/aboutpage.jpg
 
 ---
+(This text is obnoxiously red on purpose)
 
 appendTo is your leading source of technical news, tips, and tutorials.
 

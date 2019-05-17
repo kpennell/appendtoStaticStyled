@@ -1,8 +1,6 @@
 ---
 templateKey: about-page
-title: About Page (created with gatsby-node.js)
-image: /img/aboutpage.jpg
-
+title: About Page testing (created with gatsby-node.js)
 ---
 (This text is obnoxiously red on purpose)
 
